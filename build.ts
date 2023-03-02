@@ -7,7 +7,7 @@ function url(url){
 }
 const asyncs=[];
 for(const entry of fs.walkSync("./")) {
-  if(entry.path==="./")return;
+  if(entry.path==="./")continue;
   if(entry.isDirectory){
     asyncs.push(Deno.mkdir("./dist/"+entry.path, { recursive: true }));
   }
