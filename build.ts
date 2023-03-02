@@ -14,7 +14,8 @@ for(const entry of fs.walkSync("./src")) {
   if(entry.isFile){
     asyncs.push(fs.copy(entry.path,"./dist/"+entry.path));
   }
-  url("https://nakasyou.github.io/"+entry.path);
+  const path=(entry.path==="src") ? entry.path.replace("src","") : entry.path.replace("src/","");
+  url("https://nakasyou.github.io/"+path);
 }
 console.log(xml)
 await Promise.all(asyncs);
