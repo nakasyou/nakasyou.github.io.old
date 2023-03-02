@@ -6,7 +6,7 @@ function url(url){
   xml+=`<url><loc>${url}</loc></url>`;
 }
 const asyncs=[];
-for(const entry of fs.walkSync("./")) {
+for(const entry of fs.walkSync("./src")) {
   if(entry.path==="./")continue;
   if(entry.isDirectory){
     asyncs.push(Deno.mkdir("./dist/"+entry.path, { recursive: true }));
