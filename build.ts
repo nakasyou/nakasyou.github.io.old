@@ -5,6 +5,6 @@ let xml=`<?xml version="1.0" encoding="UTF-8"?>
 function url(url){
   xml+=`<url><loc>${url}</loc></url>`;
 }
-for await (const entry of walk("./")) {
+for await (const entry of fs.walk("./")) {
   console.log(entry);
 }
