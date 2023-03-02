@@ -5,6 +5,9 @@ let xml=`<?xml version="1.0" encoding="UTF-8"?>
 function url(url){
   xml+=`<url><loc>${url}</loc></url>`;
 }
+const copy=fs.copy("./","./dist");
 for await (const entry of fs.walk("./")) {
-  console.log(entry);
+  url("https://nakasyou.github.io/"+entry.path);
 }
+await copy;
+console.log(xml)
