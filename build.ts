@@ -5,9 +5,15 @@ let xml=`<?xml version="1.0" encoding="UTF-8"?>
 function url(url){
   xml+=`<url><loc>${url}</loc></url>`;
 }
-const copy=fs.copy("./","./dist");
+const asyncs=[];
 for await (const entry of fs.walk("./")) {
+  if(entry.isDirectory){
+    asyncs.push(Deno.mkdir("./dist/"+entry.path, { recursive: true }));
+  }
+  if(entry.isFile){
+    asyncs.push(fs.copy(entry.path,"./dist/"+entry.path));
+  }
   url("https://nakasyou.github.io/"+entry.path);
 }
-await copy;
 console.log(xml)
+await Promise.all(asyncs);
